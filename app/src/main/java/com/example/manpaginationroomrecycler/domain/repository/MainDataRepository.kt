@@ -1,12 +1,14 @@
 package com.example.manpaginationroomrecycler.domain.repository
+
 import android.util.Log
 import com.example.manpaginationroomrecycler.data.db.ResultDatabase
 import com.example.manpaginationroomrecycler.data.network.MainAPI
 import com.example.manpaginationroomrecycler.domain.model.Item
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class MainDataRepository(
+class MainDataRepository @Inject constructor(
     private val mainAPI: MainAPI,
     private val db: ResultDatabase
 ) {
@@ -23,7 +25,7 @@ class MainDataRepository(
                 }
             }
         } catch (e: Exception) {
-            Log.e("some",e.toString())
+            Log.e("some", e.toString())
         }
     }
 }

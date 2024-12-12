@@ -1,5 +1,4 @@
 package com.example.manpaginationroomrecycler
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -7,16 +6,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.manpaginationroomrecycler.data.db.ResultDatabase
-import com.example.manpaginationroomrecycler.data.network.ApiClient
-import com.example.manpaginationroomrecycler.data.network.MainAPI
 import com.example.manpaginationroomrecycler.databinding.ActivityMainBinding
-import com.example.manpaginationroomrecycler.domain.repository.MainDataRepository
 import com.example.manpaginationroomrecycler.presentation.adapter.ItemRecyclerViewAdapter
 import com.example.manpaginationroomrecycler.presentation.viewmodel.MainViewModel
-import com.example.manpaginationroomrecycler.presentation.viewmodel.MainViewModelProviderFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
@@ -26,12 +23,7 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         viewModel = ViewModelProvider(
-            this, MainViewModelProviderFactory(
-                MainDataRepository(
-                    mainAPI = ApiClient.mainApi,
-                    ResultDatabase.invoke(applicationContext)
-                )
-            )
+            this
         )[MainViewModel::class.java]
 
         setAdapter()
